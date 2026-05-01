@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
-import { Plus, Clock, CheckCircle, AlertCircle, Save } from 'lucide-react';
+import { Plus, Clock, CheckCircle, AlertCircle } from 'lucide-react';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
 
@@ -231,7 +231,7 @@ const Tasks = () => {
     fetchUsers();
   }, [user]);
 
-  const fetchTasks = async () => {
+  async function fetchTasks() {
     try {
       const config = { headers: { Authorization: `Bearer ${user.token}` } };
       const { data } = await axios.get(`${API_URL}/api/tasks`, config);
@@ -239,9 +239,9 @@ const Tasks = () => {
     } catch (error) {
       console.error('Error fetching tasks', error);
     }
-  };
+  }
 
-  const fetchProjects = async () => {
+  async function fetchProjects() {
     try {
       const config = { headers: { Authorization: `Bearer ${user.token}` } };
       const { data } = await axios.get(`${API_URL}/api/projects`, config);
@@ -249,16 +249,16 @@ const Tasks = () => {
     } catch (error) {
       console.error('Error fetching projects', error);
     }
-  };
+  }
 
-  const fetchUsers = async () => {
+  async function fetchUsers() {
     try {
       const { data } = await axios.get(`${API_URL}/api/auth`);
       setAllUsers(data);
     } catch (error) {
       console.error('Error fetching users', error);
     }
-  };
+  }
 
   const handleCreateTask = async (e) => {
     e.preventDefault();

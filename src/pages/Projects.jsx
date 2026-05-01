@@ -22,7 +22,7 @@ const Projects = () => {
     fetchUsers();
   }, [user]);
 
-  const fetchTasks = async () => {
+  async function fetchTasks() {
     try {
       const config = { headers: { Authorization: `Bearer ${user.token}` } };
       const { data } = await axios.get(`${API_URL}/api/tasks`, config);
@@ -30,9 +30,9 @@ const Projects = () => {
     } catch (error) {
       console.error('Error fetching tasks', error);
     }
-  };
+  }
 
-  const fetchProjects = async () => {
+  async function fetchProjects() {
     try {
       const config = { headers: { Authorization: `Bearer ${user.token}` } };
       const { data } = await axios.get(`${API_URL}/api/projects`, config);
@@ -40,16 +40,16 @@ const Projects = () => {
     } catch (error) {
       console.error('Error fetching projects', error);
     }
-  };
+  }
 
-  const fetchUsers = async () => {
+  async function fetchUsers() {
     try {
       const { data } = await axios.get(`${API_URL}/api/auth`);
       setAllUsers(data);
     } catch (error) {
       console.error('Error fetching users', error);
     }
-  };
+  }
 
   const handleCreateProject = async (e) => {
     e.preventDefault();
